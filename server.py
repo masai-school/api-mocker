@@ -20,6 +20,27 @@ def index():
 		return "MASAI SCHOOL"
 
 
+@app.route('/codenames/<os>', method=['OPTIONS', 'GET'])
+def codenames(os):
+	if request.method == 'OPTIONS':
+		return {}
+	else:
+		if os == 'android':
+			android = [{"version": 9, "name": "Pie"}, {"version": 8, "name": "Oreo"}, {"version": 7, "name": "Nougat"}]
+			return json.dumps({"os": "android", "codenames": android})
+		elif os == 'ubuntu':
+			ubuntu = [{"version": 19.04, "name": "Disco Dingo"}, {"version": 18.04, "name": "Bionic Beaver"}, {"version": 17.04, "name": "Zesty Zapus"}]
+			return json.dumps({"os": "ubuntu", "codenames": ubuntu})
+		elif os == 'windows':
+			windows = [{"version": 10, "name": "Redstone"}, {"version": 8, "name": "Jupiter"}, {"version": 7, "name": "Blackcomb"}]
+			return json.dumps({"os": "windows", "codenames": windows})
+		elif os == 'macos':
+			macos = [{'version': 10.14, "name": "Mojave"}, {"version": 10.13, "name": "High Sierra"}, {"version": 10.11, "name": "El Capitan"}]
+			return json.dumps({"os": "macos", "codenames": macos})
+		else:
+			return json.dumps({"os": os, "codenames": []})
+
+
 @app.route('/auth/register', method=['OPTIONS', 'POST'])
 def auth_register():
 	if request.method == 'OPTIONS':
